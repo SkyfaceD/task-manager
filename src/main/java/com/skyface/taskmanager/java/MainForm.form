@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.skyface.taskmanager.java.MainForm">
+  <grid id="27dc6" binding="panelContainer" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="400" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-15854047"/>
+      <enabled value="true"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="82ba0" binding="panelToolbar" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="8" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14405827"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="5aafb" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="2e133" class="javax.swing.JButton" binding="btnClose">
+                <constraints border-constraint="Center"/>
+                <properties>
+                  <background color="-14405827"/>
+                  <borderPainted value="false"/>
+                  <focusable value="false"/>
+                  <font name="JetBrains Mono Medium" size="18" style="0"/>
+                  <foreground color="-11049357"/>
+                  <text value="×"/>
+                </properties>
+              </component>
+              <component id="60dbc" class="javax.swing.JButton" binding="btnMinimize">
+                <constraints border-constraint="West"/>
+                <properties>
+                  <background color="-14405827"/>
+                  <borderPainted value="false"/>
+                  <focusable value="false"/>
+                  <font name="SansSerif" size="18" style="0"/>
+                  <foreground color="-11049357"/>
+                  <text value="─"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <hspacer id="aa13e">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <component id="58aaa" class="javax.swing.JLabel" binding="txtToolbar">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <foreground color="-1"/>
+              <icon value="images/icon_16x16.png"/>
+              <text value="Task Manager"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="97f81" binding="panelContent" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="8" left="8" bottom="8" right="8"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-15261397"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="2bef8" class="javax.swing.JList" binding="list1" default-binding="true">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-15261397"/>
+              <foreground color="-1"/>
+              <model>
+                <item value="йцу"/>
+                <item value="йцу"/>
+                <item value="йцу"/>
+                <item value="йцу"/>
+                <item value="йцу"/>
+                <item value="йцу"/>
+              </model>
+              <selectionBackground color="-13879225"/>
+              <selectionForeground color="-1"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
