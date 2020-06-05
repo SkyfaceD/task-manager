@@ -3,7 +3,6 @@ package com.skyface.taskmanager.java;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
-import com.skyface.taskmanager.java.utils.RoundedBorder;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
@@ -148,8 +147,8 @@ public class MainForm extends JFrame {
 
         List<JMenuItem> listOfMenus = new ArrayList<>();
         listOfMenus.add(new JMenuItem("Развернуть", new ImageIcon(getClass().getResource("/images/expand.png"))));
-        listOfMenus.add(new JMenuItem("Логи", new ImageIcon(getClass().getResource("/images/edit.png"))));
-        listOfMenus.add(new JMenuItem("Закрыть", new ImageIcon(getClass().getResource("/images/logout.png"))));
+        listOfMenus.add(new JMenuItem("Логи", new ImageIcon(getClass().getResource("/images/log.png"))));
+        listOfMenus.add(new JMenuItem("Закрыть", new ImageIcon(getClass().getResource("/images/exit.png"))));
 
         listOfMenus.get(0).addActionListener(action -> showAppFromTray());
         listOfMenus.get(2).addActionListener(action -> closeApp());
