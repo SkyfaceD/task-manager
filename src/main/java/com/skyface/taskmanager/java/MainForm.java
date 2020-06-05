@@ -143,7 +143,7 @@ public class MainForm extends JFrame {
         popupMenu = new JPopupMenu();
         popupMenu.setBackground(new Color(0x17212B));
 //        popupMenu.setBackground(new Color(0x00000000, true));
-        popupMenu.setBorder(new RoundedBorder());
+//        popupMenu.setBorder(new RoundedBorder());
 
         List<JMenuItem> listOfMenus = new ArrayList<>();
         listOfMenus.add(new JMenuItem("Развернуть", new ImageIcon(getClass().getResource("/images/expand.png"))));

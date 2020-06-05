@@ -1,12 +1,14 @@
 package com.skyface.taskmanager.kotlin.ui
 
+import com.skyface.taskmanager.kotlin.custom.CustomScrollBarUI
 import com.skyface.taskmanager.kotlin.utils.APP_NAME
-import com.skyface.taskmanager.kotlin.utils.DEFAULT_BUTTON_BACKGROUND
-import com.skyface.taskmanager.kotlin.utils.DEFAULT_BUTTON_FOREGROUND
+import com.skyface.taskmanager.kotlin.utils.DEFAULT_TOOLBAR_BUTTON_BACKGROUND
+import com.skyface.taskmanager.kotlin.utils.DEFAULT_TOOLBAR_BUTTON_FOREGROUND
 import com.skyface.taskmanager.kotlin.utils.addMargin
 import java.awt.*
 import java.awt.event.*
 import javax.swing.*
+import javax.swing.JList.VERTICAL
 import javax.swing.border.LineBorder
 import javax.swing.border.TitledBorder
 import javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION
@@ -16,10 +18,14 @@ import kotlin.system.exitProcess
 
 class ActivityMain : JFrame() {
     private val container = JPanel(null)
+
     private val toolbar = JPanel(null)
     private val lblToolbar = JLabel()
     private val btnMinimize = JButton()
     private val btnClose = JButton()
+
+    private val listPicker = JList<String>()
+    private val scrollPicker = JScrollPane()
 
     private val systemTray = SystemTray.getSystemTray()
     private val popUpMenu = JPopupMenu()
@@ -43,7 +49,7 @@ class ActivityMain : JFrame() {
     private fun initCustomPopUpMenu() {
         popUpMenu.background = Color(0x17212B)
         popUpMenu.border = TitledBorder(
-                LineBorder(DEFAULT_BUTTON_BACKGROUND, 4, true),
+                LineBorder(DEFAULT_TOOLBAR_BUTTON_BACKGROUND, 4, true),
                 APP_NAME,
                 DEFAULT_JUSTIFICATION,
                 DEFAULT_POSITION,
@@ -176,8 +182,8 @@ class ActivityMain : JFrame() {
 
     private fun changeButtonColor(
             btn: JButton,
-            back: Color = DEFAULT_BUTTON_BACKGROUND,
-            fore: Color = DEFAULT_BUTTON_FOREGROUND
+            back: Color = DEFAULT_TOOLBAR_BUTTON_BACKGROUND,
+            fore: Color = DEFAULT_TOOLBAR_BUTTON_FOREGROUND
     ) {
         btn.background = back
         btn.foreground = fore
@@ -185,9 +191,10 @@ class ActivityMain : JFrame() {
 
     private fun initComponents() {
         container.setSize(500, 500)
+        container.background = Color(0x17212B)
 
         toolbar.bounds = Rectangle(0, 0, container.width, 30)
-        toolbar.background = Color(0x242F3D)
+        toolbar.background = Color(0x0E1621)
 
         lblToolbar.apply {
             bounds = Rectangle(10, 0, toolbar.width - 120, toolbar.height)
@@ -198,8 +205,8 @@ class ActivityMain : JFrame() {
 
         btnMinimize.apply {
             bounds = Rectangle(toolbar.width - 80, 0, 40, toolbar.height)
-            background = Color(0x242F3D)
-            foreground = Color(0x576673)
+            background = DEFAULT_TOOLBAR_BUTTON_BACKGROUND
+            foreground = DEFAULT_TOOLBAR_BUTTON_FOREGROUND
             isFocusable = false
             border = null
             text = "─"
@@ -207,26 +214,55 @@ class ActivityMain : JFrame() {
 
         btnClose.apply {
             bounds = Rectangle(toolbar.width - 40, 0, 40, toolbar.height)
-            background = Color(0x242F3D)
-            foreground = Color(0x576673)
+            background = DEFAULT_TOOLBAR_BUTTON_BACKGROUND
+            foreground = DEFAULT_TOOLBAR_BUTTON_FOREGROUND
             isFocusable = false
             border = null
             text = "×"
         }
 
-        val exit = JButton()
-        exit.bounds = Rectangle(toolbar.width / 2 - 50, 0, 100, toolbar.height)
-        exit.text = "Close"
-        exit.addActionListener { closeApp() }
-
         toolbar.apply {
             add(lblToolbar)
             add(btnMinimize)
             add(btnClose)
-            add(exit)
+        }
+
+        val listOfNames = Array(100) {
+            it.toString()
+        }
+
+        listPicker.setListData(listOfNames)
+
+        listPicker.apply {
+            background = Color(0x242F3D)
+            foreground = Color.WHITE
+            selectionBackground = Color(0x2C3847)
+            selectionForeground = Color.WHITE
+            layoutOrientation = VERTICAL
+            border = BorderFactory.createEmptyBorder(0, 6, 0, 6)
+        }
+
+        scrollPicker.apply {
+            bounds = Rectangle(0, toolbar.height, 200, container.height - toolbar.height)
+            background = Color(0x242F3D)
+            border = BorderFactory.createCompoundBorder(
+                    BorderFactory.createEmptyBorder(4, 4, 4, 4),
+                    TitledBorder(
+                            LineBorder(DEFAULT_TOOLBAR_BUTTON_BACKGROUND, 2, true),
+                            "Запланированные задачи",
+                            DEFAULT_JUSTIFICATION,
+                            DEFAULT_POSITION,
+                            Font(fontName, Font.BOLD, 12),
+                            Color.WHITE
+                    )
+            )
+            verticalScrollBar.setUI(CustomScrollBarUI())
+            verticalScrollBar.background = Color(0x242F3D)
+            setViewportView(listPicker)
         }
 
         container.add(toolbar)
+        container.add(scrollPicker)
     }
 
     private fun initFrame() {
