@@ -20,6 +20,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.cronutils</groupId>
+            <artifactId>cron-utils</artifactId>
+            <version>9.0.2</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.adedayo.intellij.sdk</groupId>
             <artifactId>asm-all</artifactId>
             <version>142.1</version>
@@ -49,6 +54,11 @@
             <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.lgooddatepicker</groupId>
+            <artifactId>LGoodDatePicker</artifactId>
+            <version>10.3.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -67,7 +77,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.skyface.taskmanager.java.MainForm</mainClass>
+                                    <mainClass>com.skyface.taskmanager.kotlin.MainKt</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

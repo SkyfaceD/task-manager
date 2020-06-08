@@ -1,7 +1,8 @@
 package com.skyface.taskmanager.kotlin
 
-import com.skyface.taskmanager.kotlin.ui.ActivityMain
+import com.skyface.taskmanager.kotlin.ui.MainFrame
 
 fun main() {
-    ActivityMain()
+    val app = MainFrame
+    app.showFrame()
 }

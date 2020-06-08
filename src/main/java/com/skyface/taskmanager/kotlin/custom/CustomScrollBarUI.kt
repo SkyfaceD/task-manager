@@ -5,7 +5,8 @@ import javax.swing.JButton
 import javax.swing.JComponent
 import javax.swing.plaf.basic.BasicScrollBarUI
 
-class CustomScrollBarUI : BasicScrollBarUI() {
+
+class CustomScrollBarUI(private val isVertical: Boolean = true) : BasicScrollBarUI() {
     override fun createDecreaseButton(orientation: Int): JButton {
         return createInvisibleButton()
     }
@@ -32,7 +33,7 @@ class CustomScrollBarUI : BasicScrollBarUI() {
                 RenderingHints.VALUE_ANTIALIAS_ON
         )
 
-        graphic.paint = if (!c.isEnabled || thumbBounds.width > thumbBounds.height) {
+        graphic.paint = if (!c.isEnabled) {
             return
         } else if (isDragging) {
             Color.WHITE
@@ -42,13 +43,24 @@ class CustomScrollBarUI : BasicScrollBarUI() {
             Color.GRAY
         }
 
-        graphic.drawRoundRect(
-                thumbBounds.x,
-                thumbBounds.y,
-                thumbBounds.width - 6,
-                thumbBounds.height - 4,
-                12,
-                12
-        )
+        if (isVertical) {
+            graphic.drawRoundRect(
+                    thumbBounds.x,
+                    thumbBounds.y,
+                    thumbBounds.width - 6,
+                    thumbBounds.height - 4,
+                    12,
+                    12
+            )
+        } else {
+            graphic.drawRoundRect(
+                    thumbBounds.x,
+                    thumbBounds.y + 2,
+                    thumbBounds.width - 2,
+                    thumbBounds.height - 4,
+                    12,
+                    12
+            )
+        }
     }
 }

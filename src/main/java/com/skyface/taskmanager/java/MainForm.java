@@ -29,7 +29,18 @@ public class MainForm extends JFrame {
     private JButton btnMinimize;
     private JButton btnClose;
     private JLabel txtToolbar;
-    public JList list1;
+    public JButton button1;
+    public JRadioButton radioButton1;
+    public JRadioButton radioButton2;
+    public JRadioButton radioButton3;
+    public JRadioButton radioButton4;
+    public JCheckBox checkBox1;
+    public JCheckBox checkBox2;
+    public JCheckBox checkBox3;
+    public JCheckBox checkBox4;
+    public JCheckBox checkBox5;
+    public JCheckBox checkBox6;
+    public JCheckBox checkBox7;
 
     private TrayIcon trayIcon;
     private SystemTray systemTray;
@@ -146,9 +157,9 @@ public class MainForm extends JFrame {
 //        popupMenu.setBorder(new RoundedBorder());
 
         List<JMenuItem> listOfMenus = new ArrayList<>();
-        listOfMenus.add(new JMenuItem("Развернуть", new ImageIcon(getClass().getResource("/images/expand.png"))));
-        listOfMenus.add(new JMenuItem("Логи", new ImageIcon(getClass().getResource("/images/log.png"))));
-        listOfMenus.add(new JMenuItem("Закрыть", new ImageIcon(getClass().getResource("/images/exit.png"))));
+        listOfMenus.add(new JMenuItem("Развернуть", new ImageIcon(getClass().getResource("/images/menu_expand.png"))));
+        listOfMenus.add(new JMenuItem("Логи", new ImageIcon(getClass().getResource("/images/menu_log.png"))));
+        listOfMenus.add(new JMenuItem("Закрыть", new ImageIcon(getClass().getResource("/images/menu_close.png"))));
 
         listOfMenus.get(0).addActionListener(action -> showAppFromTray());
         listOfMenus.get(2).addActionListener(action -> closeApp());
@@ -193,7 +204,7 @@ public class MainForm extends JFrame {
         });
 
         trayIcon = new TrayIcon(
-                new ImageIcon(getClass().getResource("/images/icon_16x16.png")).getImage(),
+                new ImageIcon(getClass().getResource("/images/logo_16x16.png")).getImage(),
                 "Task Manager"
         );
 
@@ -217,7 +228,7 @@ public class MainForm extends JFrame {
         setLocationRelativeTo(panelContainer);
         setSize(400, 400);
         setUndecorated(true);
-        setIconImage(new ImageIcon(getClass().getResource("/images/icon_32x32.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/images/logo_32x32.png")).getImage());
         setVisible(true);
     }
 
@@ -309,27 +320,54 @@ public class MainForm extends JFrame {
         panelToolbar.add(spacer1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         txtToolbar = new JLabel();
         txtToolbar.setForeground(new Color(-1));
-        txtToolbar.setIcon(new ImageIcon(getClass().getResource("/images/icon_16x16.png")));
+        txtToolbar.setIcon(new ImageIcon(getClass().getResource("/images/logo_16x16.png")));
         txtToolbar.setText("Task Manager");
         panelToolbar.add(txtToolbar, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         panelContent = new JPanel();
-        panelContent.setLayout(new GridLayoutManager(1, 1, new Insets(8, 8, 8, 8), -1, -1));
+        panelContent.setLayout(new GridLayoutManager(4, 4, new Insets(8, 8, 8, 8), -1, -1));
         panelContent.setBackground(new Color(-15261397));
         panelContainer.add(panelContent, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        list1 = new JList();
-        list1.setBackground(new Color(-15261397));
-        list1.setForeground(new Color(-1));
-        final DefaultListModel defaultListModel1 = new DefaultListModel();
-        defaultListModel1.addElement("йцу");
-        defaultListModel1.addElement("йцу");
-        defaultListModel1.addElement("йцу");
-        defaultListModel1.addElement("йцу");
-        defaultListModel1.addElement("йцу");
-        defaultListModel1.addElement("йцу");
-        list1.setModel(defaultListModel1);
-        list1.setSelectionBackground(new Color(-13879225));
-        list1.setSelectionForeground(new Color(-1));
-        panelContent.add(list1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        button1 = new JButton();
+        button1.setText("Button");
+        panelContent.add(button1, new GridConstraints(0, 3, 3, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radioButton1 = new JRadioButton();
+        radioButton1.setText("RadioButton");
+        panelContent.add(radioButton1, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radioButton2 = new JRadioButton();
+        radioButton2.setText("RadioButton");
+        panelContent.add(radioButton2, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radioButton3 = new JRadioButton();
+        radioButton3.setText("RadioButton");
+        panelContent.add(radioButton3, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radioButton4 = new JRadioButton();
+        radioButton4.setText("RadioButton");
+        panelContent.add(radioButton4, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        checkBox1 = new JCheckBox();
+        checkBox1.setText("CheckBox");
+        panelContent.add(checkBox1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JScrollPane scrollPane1 = new JScrollPane();
+        panelContent.add(scrollPane1, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        final JPanel panel2 = new JPanel();
+        panel2.setLayout(new GridLayoutManager(4, 2, new Insets(0, 0, 0, 0), -1, -1));
+        scrollPane1.setViewportView(panel2);
+        checkBox2 = new JCheckBox();
+        checkBox2.setText("CheckBox");
+        panel2.add(checkBox2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        checkBox3 = new JCheckBox();
+        checkBox3.setText("CheckBox");
+        panel2.add(checkBox3, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        checkBox4 = new JCheckBox();
+        checkBox4.setText("CheckBox");
+        panel2.add(checkBox4, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        checkBox5 = new JCheckBox();
+        checkBox5.setText("CheckBox");
+        panel2.add(checkBox5, new GridConstraints(1, 1, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        checkBox6 = new JCheckBox();
+        checkBox6.setText("CheckBox");
+        panel2.add(checkBox6, new GridConstraints(2, 0, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        checkBox7 = new JCheckBox();
+        checkBox7.setText("CheckBox");
+        panel2.add(checkBox7, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
