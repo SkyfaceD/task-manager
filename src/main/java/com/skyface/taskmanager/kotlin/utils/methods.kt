@@ -4,24 +4,30 @@ import com.skyface.taskmanager.kotlin.model.Task
 import com.skyface.taskmanager.kotlin.ui.MainFrame
 import java.awt.Color
 import java.awt.Image
-import java.util.*
-import javax.swing.*
+import javax.swing.ImageIcon
+import javax.swing.JButton
+import kotlin.random.Random
 
 fun String.toImage(): Image {
-    return ImageIcon(MainFrame::class.java.getResource(this)).image
+    return ImageIcon(MainFrame::class.java.getResource("/icons/$this")).image
 }
 
 fun String.toIcon(): ImageIcon {
-    return ImageIcon(MainFrame::class.java.getResource(this))
+    return ImageIcon(MainFrame::class.java.getResource("/icons/$this"))
 }
 
 fun String.addMargin(
         top: Int = 0,
         bottom: Int = 0,
         left: Int = 0,
-        right: Int = 0
+        right: Int = 0,
+        fontSize: Int = 12
 ): String {
-    return "<html><p style='margin-top:$top; margin-bottom:$bottom; margin-left:$left; margin-right:$right'>$this"
+    return "<html><p style='margin-top:$top; margin-bottom:$bottom; margin-left:$left; margin-right:$right; font-size:$fontSize'>$this"
+}
+
+fun String.removeMargin(): String {
+    return this.substringAfterLast(">")
 }
 
 fun changeButtonBackgroundAndForeground(
@@ -33,50 +39,6 @@ fun changeButtonBackgroundAndForeground(
 
     btn.background = bg
     btn.foreground = fg
-}
-
-//TODO replace to main method
-fun validateComponents(
-        edtName: JTextField,
-        edtDescription: JTextArea,
-        trigger: Int,
-        weekList: List<JCheckBox>,
-        monthList: List<JCheckBox>,
-        path: String?
-): Boolean {
-    if (edtName.text.isEmpty())
-        return false
-
-    if (edtDescription.text.isEmpty())
-        return false
-
-    when (trigger) {
-        2 -> {
-            var b1 = false
-            for (item in weekList) {
-                if (item.isSelected) {
-                    b1 = true
-                    break
-                }
-            }
-            if (!b1) return false
-        }
-        3 -> {
-            var b2 = false
-            for (item in monthList) {
-                if (item.isSelected) {
-                    b2 = true
-                    break
-                }
-            }
-            if (!b2) return false
-        }
-    }
-
-    if (path.isNullOrEmpty())
-        return false
-
-    return true
 }
 
 /**
@@ -108,35 +70,35 @@ fun validateComponents(
 fun populateList(): List<Task> {
     return arrayListOf(
             Task(
-                    Random().nextInt(500),
-                    "Task 1",
+                    null,
+                    "Task ${Random.nextInt(99999)}",
                     "Description 1",
                     0,
                     "0 43 21 8 6 ? 2020",
                     "H:\\Soft\\UninstallToolPortable.exe"
             ),
             Task(
-                    Random().nextInt(500),
-                    "Task 2",
+                    null,
+                    "Task ${Random.nextInt(99999)}",
                     "Description 2",
                     1,
-                    "0 43 21 ? 6 * 2020",
+                    "0 43 21 ? * * *",
                     "H:\\Soft\\UninstallToolPortable.exe"
             ),
             Task(
-                    Random().nextInt(500),
-                    "Task 3",
+                    null,
+                    "Task ${Random.nextInt(99999)}",
                     "Description 3",
                     2,
-                    "0 43 21 ? * SUN,TUE,THU *",
+                    "0 43 21 ? * 1,3,5 *",
                     "H:\\Soft\\UninstallToolPortable.exe"
             ),
             Task(
-                    Random().nextInt(500),
-                    "Task 4",
+                    null,
+                    "Task ${Random.nextInt(99999)}",
                     "Description 4",
                     3,
-                    "0 43 21 ? JAN,APR,DEC * *",
+                    "0 43 21 ? 1,3,12 * *",
                     "H:\\Soft\\UninstallToolPortable.exe"
             )
     )

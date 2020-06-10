@@ -24,7 +24,7 @@ class TrayComponent {
 
     private val systemTray = SystemTray.getSystemTray()
 
-    private val trayIcon = TrayIcon("/images/logo_16x16.png".toImage(), APP_NAME)
+    private val trayIcon = TrayIcon("logo_16x16.png".toImage(), APP_NAME)
 
     private lateinit var popUpMenuList: List<JMenuItem>
 
@@ -118,15 +118,15 @@ class TrayComponent {
         popUpMenuList = arrayListOf(
                 JMenuItem(
                         "Развернуть".addMargin(12, 12, 4),
-                        "/images/menu_expand.png".toIcon()
+                        "menu_expand.png".toIcon()
                 ),
                 JMenuItem(
                         "Логи".addMargin(12, 12, 4),
-                        "/images/menu_log.png".toIcon()
+                        "menu_log.png".toIcon()
                 ),
                 JMenuItem(
                         "Закрыть".addMargin(12, 12, 4),
-                        "/images/menu_close.png".toIcon()
+                        "menu_close.png".toIcon()
                 )
         )
 

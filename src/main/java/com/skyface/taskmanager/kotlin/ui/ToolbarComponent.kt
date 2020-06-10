@@ -31,7 +31,7 @@ class ToolbarComponent : JPanel(null) {
         size = Dimension(TOOLBAR_WIDTH, TOOLBAR_HEIGHT)
         background = TOOLBAR_BACKGROUND
 
-        lblToolbar.icon = ImageIcon(javaClass.getResource("/images/logo_16x16.png"))
+        lblToolbar.icon = "logo_16x16.png".toIcon()
         lblToolbar.apply {
             bounds = Rectangle(10, 0, this@ToolbarComponent.width - 120, this@ToolbarComponent.height)
             foreground = COLOR_WHITE

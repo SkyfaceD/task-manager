@@ -157,9 +157,9 @@ public class MainForm extends JFrame {
 //        popupMenu.setBorder(new RoundedBorder());
 
         List<JMenuItem> listOfMenus = new ArrayList<>();
-        listOfMenus.add(new JMenuItem("Развернуть", new ImageIcon(getClass().getResource("/images/menu_expand.png"))));
-        listOfMenus.add(new JMenuItem("Логи", new ImageIcon(getClass().getResource("/images/menu_log.png"))));
-        listOfMenus.add(new JMenuItem("Закрыть", new ImageIcon(getClass().getResource("/images/menu_close.png"))));
+        listOfMenus.add(new JMenuItem("Развернуть", new ImageIcon(getClass().getResource("menu_expand.png"))));
+        listOfMenus.add(new JMenuItem("Логи", new ImageIcon(getClass().getResource("menu_log.png"))));
+        listOfMenus.add(new JMenuItem("Закрыть", new ImageIcon(getClass().getResource("menu_close.png"))));
 
         listOfMenus.get(0).addActionListener(action -> showAppFromTray());
         listOfMenus.get(2).addActionListener(action -> closeApp());
@@ -204,7 +204,7 @@ public class MainForm extends JFrame {
         });
 
         trayIcon = new TrayIcon(
-                new ImageIcon(getClass().getResource("/images/logo_16x16.png")).getImage(),
+                new ImageIcon(getClass().getResource("logo_16x16.png")).getImage(),
                 "Task Manager"
         );
 
@@ -228,7 +228,7 @@ public class MainForm extends JFrame {
         setLocationRelativeTo(panelContainer);
         setSize(400, 400);
         setUndecorated(true);
-        setIconImage(new ImageIcon(getClass().getResource("/images/logo_32x32.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("logo_32x32.png")).getImage());
         setVisible(true);
     }
 

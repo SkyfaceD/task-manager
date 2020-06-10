@@ -4,22 +4,20 @@ import com.skyface.taskmanager.kotlin.utils.*
 import java.awt.Color
 import java.awt.Font
 import java.awt.Rectangle
-import javax.swing.BorderFactory
 import javax.swing.ButtonGroup
 import javax.swing.JPanel
 import javax.swing.JRadioButton
-import javax.swing.border.EmptyBorder
 import javax.swing.border.LineBorder
 import javax.swing.border.TitledBorder
 import javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION
 import javax.swing.border.TitledBorder.DEFAULT_POSITION
 
-class DetailRadioButtons {
-    private val detail = DetailComponent
+class DetailTrigger {
+    private val detailComponent = DetailComponent
 
-    val rbPanel = JPanel(null)
-
+    private val rbPanel = JPanel(null)
     private val rbGroup = ButtonGroup()
+
     private val rbOneTime = JRadioButton()
     private val rbEveryDay = JRadioButton()
     private val rbEveryWeek = JRadioButton()
@@ -27,35 +25,90 @@ class DetailRadioButtons {
 
     private lateinit var rbList: List<JRadioButton>
 
+    val panel = rbPanel
+    var trigger = 0
+
     init {
         initRadioButtons()
+
+        disableTrigger()
+
         setUpRadioButtons()
+    }
+
+    fun enableTrigger() {
+        for (item in rbList) {
+            item.isEnabled = true
+        }
+    }
+
+    fun disableTrigger() {
+        for (item in rbList) {
+            item.isEnabled = false
+        }
+    }
+
+    fun updateTrigger(index: Int) {
+        rbGroup.setSelected(rbList[index].model, true)
+
+        trigger = index
+
+        detailComponent.datePanel.border = TitledBorder(
+                LineBorder(BORDER_LINE_COLOR, 2, false),
+                rbList[index].text,
+                DEFAULT_JUSTIFICATION,
+                DEFAULT_POSITION,
+                Font(DEFAULT_FONT_NAME, Font.BOLD, 12),
+                COLOR_WHITE
+        )
+
+        when (index) {
+            0, 1 -> detailComponent.datePanel.showCheckBoxes()
+            2 -> detailComponent.datePanel.showCheckBoxes(isWeek = true)
+            3 -> detailComponent.datePanel.showCheckBoxes(isMonth = true)
+        }
+    }
+
+    fun clearTrigger() {
+        rbGroup.setSelected(rbList[0].model, true)
+
+        trigger = 0
+
+        detailComponent.datePanel.border = TitledBorder(
+                LineBorder(BORDER_LINE_COLOR, 2, false),
+                rbList[0].text,
+                DEFAULT_JUSTIFICATION,
+                DEFAULT_POSITION,
+                Font(DEFAULT_FONT_NAME, Font.BOLD, 12),
+                COLOR_WHITE
+        )
+        detailComponent.datePanel.showCheckBoxes()
     }
 
     private fun setUpRadioButtons() {
         for (item in rbList) {
             item.addActionListener {
-                detail.trigger = when (item.text) {
+                trigger = when (item.text) {
                     "Однократно" -> {
-//                        datePanelComponentsVisibility()
+                        detailComponent.datePanel.showCheckBoxes()
                         0
                     }
                     "Ежедневно" -> {
-//                        datePanelComponentsVisibility()
+                        detailComponent.datePanel.showCheckBoxes()
                         1
                     }
                     "Еженедельно" -> {
-//                        datePanelComponentsVisibility(isWeek = true)
+                        detailComponent.datePanel.showCheckBoxes(isWeek = true)
                         2
                     }
                     "Ежемесячно" -> {
-//                        datePanelComponentsVisibility(isMonth = true)
+                        detailComponent.datePanel.showCheckBoxes(isMonth = true)
                         3
                     }
                     else -> throw Exception("Trigger Exception!")
                 }
 
-                detail.datePanel.border = TitledBorder(
+                detailComponent.datePanel.border = TitledBorder(
                         LineBorder(BORDER_LINE_COLOR, 2, false),
                         item.text,
                         DEFAULT_JUSTIFICATION,
@@ -69,19 +122,16 @@ class DetailRadioButtons {
 
     private fun initRadioButtons() {
         rbPanel.apply {
-            bounds = Rectangle(10, EDIT_NAME_HEIGHT + EDIT_DESCRIPTION_HEIGHT + 30, RADIO_PANEL_WIDTH, RADIO_PANEL_HEIGHT)
+            bounds = Rectangle(10, EDIT_NAME_HEIGHT + EDIT_DESCRIPTION_HEIGHT + 30, TRIGGER_PANEL_WIDTH, TRIGGER_PANEL_HEIGHT)
             background = DEFAULT_BACKGROUND
             foreground = COLOR_WHITE
-            border = BorderFactory.createCompoundBorder(
-                    TitledBorder(
-                            LineBorder(BORDER_LINE_COLOR, 2, false),
-                            "Триггер",
-                            DEFAULT_JUSTIFICATION,
-                            DEFAULT_POSITION,
-                            Font(DEFAULT_FONT_NAME, Font.BOLD, 12),
-                            COLOR_WHITE
-                    ),
-                    EmptyBorder(0, 0, 0, 0)
+            border = TitledBorder(
+                    LineBorder(BORDER_LINE_COLOR, 2, false),
+                    "Триггер",
+                    DEFAULT_JUSTIFICATION,
+                    DEFAULT_POSITION,
+                    Font(DEFAULT_FONT_NAME, Font.BOLD, 12),
+                    COLOR_WHITE
             )
         }
 
@@ -107,8 +157,8 @@ class DetailRadioButtons {
         rb.isOpaque = false
         rb.isFocusable = false
         rb.text = text
-        rb.icon = "/images/rb_idle.png".toIcon()
-        rb.pressedIcon = "/images/rb_idle.png".toIcon()
-        rb.selectedIcon = "/images/rb_selected.png".toIcon()
+        rb.icon = "rb_idle.png".toIcon()
+        rb.pressedIcon = "rb_idle.png".toIcon()
+        rb.selectedIcon = "rb_selected.png".toIcon()
     }
 }
