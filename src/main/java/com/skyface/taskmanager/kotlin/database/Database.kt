@@ -37,10 +37,8 @@ class Database {
                         resultSet.getString("path")
                 ))
             }
-
             return list
         }
-
         return list
     }
 

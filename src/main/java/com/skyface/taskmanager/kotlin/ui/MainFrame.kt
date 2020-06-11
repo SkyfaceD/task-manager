@@ -4,10 +4,7 @@ import com.skyface.taskmanager.kotlin.cron.Job
 import com.skyface.taskmanager.kotlin.database.Database
 import com.skyface.taskmanager.kotlin.model.Task
 import com.skyface.taskmanager.kotlin.ui.detail.DetailComponent
-import com.skyface.taskmanager.kotlin.utils.CONTAINER_HEIGHT
-import com.skyface.taskmanager.kotlin.utils.CONTAINER_WIDTH
-import com.skyface.taskmanager.kotlin.utils.DEFAULT_BACKGROUND
-import com.skyface.taskmanager.kotlin.utils.toImage
+import com.skyface.taskmanager.kotlin.utils.*
 import org.quartz.CronScheduleBuilder
 import org.quartz.JobBuilder.newJob
 import org.quartz.TriggerBuilder.newTrigger
@@ -38,6 +35,12 @@ object MainFrame : JFrame() {
     init {
         UIManager.put("OptionPane.yesButtonText", "Да")
         UIManager.put("OptionPane.noButtonText", "Нет")
+
+//        for (i in 0..5){
+//            for (item in populateList()){
+//                Database().putData(item)
+//            }
+//        }
 
         tray.addTrayIcon()
 
@@ -144,6 +147,7 @@ object MainFrame : JFrame() {
     }
 
     fun closeApp() {
+        Database().close()
         exitProcess(0)
     }
 

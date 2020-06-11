@@ -20,4 +20,12 @@ class CronBuilder(
     fun cron(): String {
         return "$seconds $minutes $hours $dayOfMonth $month $dayOfWeek $year"
     }
+
+    fun time():String{
+        return ""
+    }
+
+    fun date():String{
+        return ""
+    }
 }

@@ -5,7 +5,6 @@ import javax.swing.JButton
 import javax.swing.JComponent
 import javax.swing.plaf.basic.BasicScrollBarUI
 
-
 class CustomScrollBarUI(private val isVertical: Boolean = true) : BasicScrollBarUI() {
     override fun createDecreaseButton(orientation: Int): JButton {
         return createInvisibleButton()
