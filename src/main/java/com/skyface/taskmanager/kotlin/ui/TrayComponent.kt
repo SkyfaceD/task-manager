@@ -64,8 +64,8 @@ class TrayComponent {
 
         popUpMenuList.apply {
             get(0).addActionListener { mainFrame.showApp() }
-            get(1).addActionListener { println("Log") }
-            get(2).addActionListener { mainFrame.closeApp() }
+//            get(1).addActionListener { println("Log") }
+            get(1).addActionListener { mainFrame.closeApp() }
         }
 
         for (item in popUpMenuList) {
@@ -120,10 +120,10 @@ class TrayComponent {
                         "Развернуть".addMargin(12, 12, 4),
                         "menu_expand.png".toIcon()
                 ),
-                JMenuItem(
-                        "Логи".addMargin(12, 12, 4),
-                        "menu_log.png".toIcon()
-                ),
+//                JMenuItem(
+//                        "Логи".addMargin(12, 12, 4),
+//                        "menu_log.png".toIcon()
+//                ),
                 JMenuItem(
                         "Закрыть".addMargin(12, 12, 4),
                         "menu_close.png".toIcon()

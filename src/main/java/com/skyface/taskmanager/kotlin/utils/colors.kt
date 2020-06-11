@@ -44,9 +44,3 @@ val DETAIL_BACKGROUND = Color(0x242F3D)
 
 val EDIT_NAME_BACKGROUND = Color(0x242F3D)
 val EDIT_DESCRIPTION_BACKGROUND = Color(0x242F3D)
-
-/**
- * future bg
- * 17212B
- */
-

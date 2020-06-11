@@ -24,17 +24,17 @@ class DetailField {
         disableFields()
     }
 
-    fun enableFields(){
+    fun enableFields() {
         edtName.isEnabled = true
         edtDescription.isEnabled = true
     }
 
-    fun disableFields(){
+    fun disableFields() {
         edtName.isEnabled = false
         edtDescription.isEnabled = false
     }
 
-    fun clearFields(){
+    fun clearFields() {
         edtName.text = ""
         edtDescription.text = ""
     }

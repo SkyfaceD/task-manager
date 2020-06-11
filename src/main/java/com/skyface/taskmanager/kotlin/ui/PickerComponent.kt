@@ -1,7 +1,6 @@
 package com.skyface.taskmanager.kotlin.ui
 
 import com.skyface.taskmanager.kotlin.custom.CustomScrollBarUI
-import com.skyface.taskmanager.kotlin.database.Database
 import com.skyface.taskmanager.kotlin.model.Task
 import com.skyface.taskmanager.kotlin.ui.detail.DetailComponent
 import com.skyface.taskmanager.kotlin.utils.*
@@ -40,18 +39,21 @@ class PickerComponent : JScrollPane() {
         setUpPicker()
     }
 
-    fun addToPicker(task: Task){
+    fun addToPicker(task: Task) {
         mainFrame.taskList.add(task)
         checkPicker()
     }
 
-    fun removeFromPicker() {
-        Database().removeData(pickedItem.second)
-        mainFrame.taskList.removeAt(pickedItem.first)
+    fun removeFromPicker(name: Task? = null) {
+        if (name != null) {
+            mainFrame.taskList.remove(name)
+        } else {
+            mainFrame.taskList.removeAt(pickedItem.first)
+        }
         checkPicker()
     }
 
-    private fun checkPicker() {
+    fun checkPicker() {
         taskNames = mainFrame.taskList.map {
             it.name.addMargin(4, 4, 4, 4)
         }.toTypedArray()
@@ -59,11 +61,16 @@ class PickerComponent : JScrollPane() {
         if (taskNames.isNotEmpty()) {
             listPicker.setListData(taskNames)
             listPicker.selectedIndex = 0
+            listPicker.isEnabled = true
             pickedItem = 0 to mainFrame.taskList[0].name
             someMethod(0)
         } else {
             listPicker.setListData(arrayOf("Нет задач".addMargin(PICKER_HEIGHT / 3 + 25, 0, 4, 4, 32)))
             listPicker.isEnabled = false
+            detailComponent.fields.clearFields()
+            detailComponent.triggers.clearTrigger()
+            detailComponent.datePanel.clearDatePanel()
+            detailComponent.pathPanel.clearPath()
         }
     }
 
@@ -84,38 +91,40 @@ class PickerComponent : JScrollPane() {
                 val list = evt.source as JList<*>
                 val index = list.locationToIndex(evt.point)
 
-                pickedItem = index to taskNames[index].removeMargin()
+                if (taskNames.isNotEmpty()) {
+                    pickedItem = index to taskNames[index].removeMargin()
 
-                if (evt.clickCount == 2) {
-                    if (mainFrame.createMode) {
-                        val result = JOptionPane.showConfirmDialog(
-                                mainFrame,
-                                "Вы уверены?",
-                                "Отмена",
-                                JOptionPane.YES_NO_OPTION,
-                                JOptionPane.QUESTION_MESSAGE
-                        )
+                    if (evt.clickCount == 2) {
+                        if (mainFrame.createMode) {
+                            val result = JOptionPane.showConfirmDialog(
+                                    mainFrame,
+                                    "Вы уверены?",
+                                    "Отмена",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE
+                            )
 
-                        if (result == JOptionPane.YES_OPTION) {
-                            mainFrame.createMode = false
+                            if (result == JOptionPane.YES_OPTION) {
+                                mainFrame.createMode = false
 
-                            mainFrame.buttons.enableButtons()
+                                mainFrame.buttons.enableButtons()
 
-                            detailComponent.fields.clearFields()
-                            detailComponent.triggers.clearTrigger()
-                            detailComponent.datePanel.clearDatePanel()
-                            detailComponent.pathPanel.clearPath()
-                            detailComponent.buttons.buttonAccessibility(true)
-                            detailComponent.setBorderTitle("Просмотр")
-                            detailComponent.fields.disableFields()
-                            detailComponent.triggers.disableTrigger()
-                            detailComponent.datePanel.disableDate()
-                            detailComponent.pathPanel.disablePath()
+                                detailComponent.fields.clearFields()
+                                detailComponent.triggers.clearTrigger()
+                                detailComponent.datePanel.clearDatePanel()
+                                detailComponent.pathPanel.clearPath()
+                                detailComponent.buttons.buttonAccessibility(true)
+                                detailComponent.setBorderTitle("Просмотр")
+                                detailComponent.fields.disableFields()
+                                detailComponent.triggers.disableTrigger()
+                                detailComponent.datePanel.disableDate()
+                                detailComponent.pathPanel.disablePath()
 
+                                someMethod(index)
+                            }
+                        } else {
                             someMethod(index)
                         }
-                    } else {
-                        someMethod(index)
                     }
                 }
             }
@@ -139,8 +148,6 @@ class PickerComponent : JScrollPane() {
     private fun someMethod(index: Int) {
         val task = mainFrame.taskList[index]
         val brokenCron = task.cron.split(" ")
-        println(task.cron)
-        println(brokenCron)
 
         val minutes = brokenCron[1]
         val hours = brokenCron[2]
@@ -172,13 +179,10 @@ class PickerComponent : JScrollPane() {
 
         detailComponent.datePanel.datePicker.text = "$day $month $year г."
         detailComponent.datePanel.timePicker.text = "$hours:$minutes"
-
         detailComponent.fields.fieldName.text = task.name
         detailComponent.fields.fieldDescription.text = task.description
         detailComponent.triggers.updateTrigger(task.trigger)
-
         detailComponent.datePanel.updateCheckBoxes(task.trigger, weeks, months)
-
         detailComponent.pathPanel.updatePath(task.path)
     }
 

@@ -4,15 +4,11 @@ import com.skyface.taskmanager.kotlin.database.Database
 import com.skyface.taskmanager.kotlin.model.Task
 import com.skyface.taskmanager.kotlin.ui.MainFrame
 import com.skyface.taskmanager.kotlin.utils.*
-import java.awt.Dimension
 import java.awt.Rectangle
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import javax.swing.JButton
-import javax.swing.JDialog
-import javax.swing.JLabel
 import javax.swing.JOptionPane
-import javax.swing.WindowConstants.DISPOSE_ON_CLOSE
 
 class DetailButtons {
 
@@ -48,7 +44,7 @@ class DetailButtons {
             })
 
             addActionListener {
-                if (mainFrame.createMode){
+                if (mainFrame.createMode) {
                     val result = JOptionPane.showConfirmDialog(
                             mainFrame,
                             "Вы уверены?",
@@ -57,10 +53,10 @@ class DetailButtons {
                             JOptionPane.QUESTION_MESSAGE
                     )
 
-                    if (result == JOptionPane.YES_OPTION){
+                    if (result == JOptionPane.YES_OPTION) {
                         mainFrame.createMode = false
 
-                        mainFrame.buttons.enableButtons()
+                        mainFrame.buttons.updateButtons()
 
                         detailComponent.fields.clearFields()
                         detailComponent.triggers.clearTrigger()
@@ -72,6 +68,7 @@ class DetailButtons {
                         detailComponent.triggers.disableTrigger()
                         detailComponent.datePanel.disableDate()
                         detailComponent.pathPanel.disablePath()
+                        mainFrame.picker.checkPicker()
                     }
                 }
             }
@@ -96,13 +93,13 @@ class DetailButtons {
                 }
             })
             addActionListener {
-                with(detailComponent){
+                with(detailComponent) {
                     if (validateComponents()) {
-                        if(validName()){
+                        if (validName()) {
                             val name = fields.fieldName.text.trim()
                             val description = fields.fieldDescription.text.trim()
 
-                            val cronBuilder = OmegaShit().apply {
+                            val cronBuilder = CronBuilder().apply {
                                 minutes = datePanel.timePicker.time.minute.toString()
                                 hours = datePanel.timePicker.time.hour.toString()
                             }
@@ -157,7 +154,7 @@ class DetailButtons {
                                     JOptionPane.QUESTION_MESSAGE
                             )
 
-                            if (result == JOptionPane.YES_OPTION){
+                            if (result == JOptionPane.YES_OPTION) {
                                 mainFrame.createMode = false
                                 Database().putData(task)
                                 mainFrame.picker.addToPicker(task)
@@ -172,8 +169,10 @@ class DetailButtons {
                                 detailComponent.triggers.disableTrigger()
                                 detailComponent.datePanel.disableDate()
                                 detailComponent.pathPanel.disablePath()
+
+                                mainFrame.addJob()
                             }
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(mainFrame, "Данное имя уже занято", "Ошибка", JOptionPane.ERROR_MESSAGE)
                         }
                     } else {
@@ -187,8 +186,8 @@ class DetailButtons {
     private fun validName(): Boolean {
         var b = true
 
-        for (item in mainFrame.taskList.map { it.name }){
-            if (item == detailComponent.fields.fieldName.text.trim()){
+        for (item in mainFrame.taskList.map { it.name }) {
+            if (item == detailComponent.fields.fieldName.text.trim()) {
                 b = false
                 break
             }
@@ -197,7 +196,7 @@ class DetailButtons {
         return b
     }
 
-    fun buttonAccessibility(isEnabled: Boolean = false){
+    fun buttonAccessibility(isEnabled: Boolean = false) {
         btnCancel.background = DEFAULT_BACKGROUND
         btnConfirm.background = DEFAULT_BACKGROUND
         btnCancel.isEnabled = isEnabled

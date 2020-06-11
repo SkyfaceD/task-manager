@@ -1,12 +1,6 @@
 package com.skyface.taskmanager.kotlin.utils
 
-import com.cronutils.descriptor.CronDescriptor
-import com.cronutils.model.CronType
-import com.cronutils.model.definition.CronDefinitionBuilder
-import com.cronutils.parser.CronParser
-import java.util.*
-
-class OmegaShit(
+class CronBuilder(
         var seconds: String = "0",
         var minutes: String = "*",
         var hours: String = "*",

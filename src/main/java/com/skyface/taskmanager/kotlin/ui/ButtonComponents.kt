@@ -26,12 +26,12 @@ class ButtonComponents {
         setUpButtons()
     }
 
-    fun enableButtons(){
+    fun enableButtons() {
         btnDeleteTask.isEnabled = true
         btnEditTask.isEnabled = true
     }
 
-    fun disableButtons(){
+    fun disableButtons() {
         btnDeleteTask.background = DEFAULT_BACKGROUND
         btnEditTask.background = DEFAULT_BACKGROUND
         btnDeleteTask.isEnabled = false
@@ -77,6 +77,7 @@ class ButtonComponents {
                 )
 
                 if (result == YES_OPTION) {
+                    Database().removeData(mainFrame.picker.pickedItem.second)
                     mainFrame.picker.removeFromPicker()
                     updateButtons()
                 }

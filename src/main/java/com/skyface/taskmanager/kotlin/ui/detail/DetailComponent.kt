@@ -3,7 +3,6 @@ package com.skyface.taskmanager.kotlin.ui.detail
 import com.skyface.taskmanager.kotlin.utils.*
 import java.awt.Font
 import java.awt.Rectangle
-import java.lang.StringBuilder
 import javax.swing.BorderFactory
 import javax.swing.JPanel
 import javax.swing.border.EmptyBorder
@@ -23,7 +22,6 @@ object DetailComponent : JPanel(null) {
     init {
         initDetail()
     }
-
 
     fun setBorderTitle(title: String) {
         border = BorderFactory.createCompoundBorder(

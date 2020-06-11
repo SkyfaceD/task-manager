@@ -6,7 +6,6 @@ const val CONTAINER_HEIGHT = 600
 const val TOOLBAR_WIDTH = CONTAINER_WIDTH
 const val TOOLBAR_HEIGHT = 30
 
-
 const val BUTTON_WIDTH = 180
 const val BUTTON_HEIGHT = 40
 

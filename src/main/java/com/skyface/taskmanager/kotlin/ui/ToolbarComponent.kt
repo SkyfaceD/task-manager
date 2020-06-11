@@ -7,7 +7,6 @@ import java.awt.Rectangle
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import java.awt.event.MouseMotionAdapter
-import javax.swing.ImageIcon
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -105,7 +104,7 @@ class ToolbarComponent : JPanel(null) {
                     )
                 }
             })
-            
+
             addActionListener { mainFrame.minimizeApp() }
         }
 
@@ -118,7 +117,7 @@ class ToolbarComponent : JPanel(null) {
                             CLOSE_BUTTON_FOREGROUND_HOVER
                     )
                 }
-                
+
                 override fun mouseExited(event: MouseEvent) {
                     changeButtonBackgroundAndForeground(
                             btnClose,
@@ -127,7 +126,7 @@ class ToolbarComponent : JPanel(null) {
                     )
                 }
             })
-            
+
             addActionListener { mainFrame.hideAppToTray() }
         }
     }

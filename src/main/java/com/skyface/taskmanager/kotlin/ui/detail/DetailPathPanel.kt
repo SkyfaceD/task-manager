@@ -28,20 +28,20 @@ class DetailPathPanel : JPanel(null) {
         setUpPathPanel()
     }
 
-    fun enablePath(){
+    fun enablePath() {
         btnPath.isEnabled = true
     }
 
-    fun disablePath(){
+    fun disablePath() {
         btnPath.isEnabled = false
     }
 
-    fun updatePath(str: String){
+    fun updatePath(str: String) {
         edtPath.text = str
         path = str
     }
 
-    fun clearPath(){
+    fun clearPath() {
         edtPath.text = ""
         path = ""
     }
