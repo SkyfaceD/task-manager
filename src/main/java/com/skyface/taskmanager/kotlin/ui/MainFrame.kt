@@ -7,18 +7,18 @@ import com.skyface.taskmanager.kotlin.ui.detail.DetailComponent
 import com.skyface.taskmanager.kotlin.utils.*
 import org.quartz.CronScheduleBuilder
 import org.quartz.JobBuilder.newJob
+import org.quartz.Scheduler
 import org.quartz.TriggerBuilder.newTrigger
 import org.quartz.impl.StdSchedulerFactory
 import java.awt.Dimension
 import java.awt.Frame
 import javax.swing.JFrame
 import javax.swing.JPanel
-import javax.swing.UIManager
 import kotlin.system.exitProcess
 
 object MainFrame : JFrame() {
     val taskList: MutableList<Task> = Database().getData()
-    val scheduler = StdSchedulerFactory.getDefaultScheduler()
+    val scheduler: Scheduler = StdSchedulerFactory.getDefaultScheduler()
 
     private val detail = DetailComponent
 
@@ -33,15 +33,6 @@ object MainFrame : JFrame() {
     var createMode = false
 
     init {
-        UIManager.put("OptionPane.yesButtonText", "Да")
-        UIManager.put("OptionPane.noButtonText", "Нет")
-
-//        for (i in 0..5){
-//            for (item in populateList()){
-//                Database().putData(item)
-//            }
-//        }
-
         tray.addTrayIcon()
 
         initComponents()
@@ -105,7 +96,7 @@ object MainFrame : JFrame() {
         }
     }
 
-    fun showFrame() {
+    fun display() {
         contentPane = container
         size = Dimension(CONTAINER_WIDTH, CONTAINER_HEIGHT)
         isUndecorated = true
@@ -128,10 +119,6 @@ object MainFrame : JFrame() {
             add(buttons.btnCreateTask)
         }
     }
-
-    /**
-     * UI Control?
-     */
 
     fun showApp() {
         if (isVisible && extendedState == Frame.NORMAL) {

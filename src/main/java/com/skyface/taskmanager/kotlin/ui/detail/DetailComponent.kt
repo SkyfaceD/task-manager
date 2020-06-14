@@ -86,6 +86,4 @@ object DetailComponent : JPanel(null) {
         add(buttons.btnCancel)
         add(buttons.btnConfirm)
     }
-
-
 }

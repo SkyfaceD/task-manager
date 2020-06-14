@@ -1,5 +1,6 @@
 package com.skyface.taskmanager.kotlin.ui.detail
 
+import com.skyface.taskmanager.kotlin.cron.CronBuilder
 import com.skyface.taskmanager.kotlin.database.Database
 import com.skyface.taskmanager.kotlin.model.Task
 import com.skyface.taskmanager.kotlin.ui.MainFrame

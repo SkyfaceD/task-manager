@@ -13,7 +13,7 @@ class Job : Job {
         p?.let {
             val dataMap = p.jobDetail.jobDataMap
 
-            val key = dataMap["key"] as JobKey
+            val jobKey = dataMap["key"] as JobKey
             val name = dataMap["name"] as String
             val trigger = dataMap["trigger"] as Int
 
@@ -24,7 +24,7 @@ class Job : Job {
                 }
 
                 Database().removeData(name)
-                mainFrame.scheduler.deleteJob(key)
+                mainFrame.scheduler.deleteJob(jobKey)
                 mainFrame.picker.removeFromPicker(task)
             }
         }

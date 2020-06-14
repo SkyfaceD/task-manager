@@ -1,4 +1,4 @@
-package com.skyface.taskmanager.kotlin.utils
+package com.skyface.taskmanager.kotlin.cron
 
 class CronBuilder(
         var seconds: String = "0",
